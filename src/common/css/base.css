@@ -1,0 +1,48 @@
+html,
+body {
+    line-height: 1;
+    font-weight: 200;
+    font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif;
+    height:100%;
+}
+
+/*2倍和3倍图片*/
+.bgimage(@url) {
+    @result : url('@{url}@2x.png');
+    background-image: @result;
+    @media (-webkit-min-device-pixel-ratio: 3), (min-device-pixel-ratio: 3) {
+        @result : url('@{url}@3x.png');
+        background-image: @result;
+    }
+}
+
+.clearfix{
+    display:inline-block;
+}
+.clearfix::after{
+    display:block;
+    content:'.';
+    height:0;
+    line-height: 0;
+    visibility: hidden;
+    clear:both;
+}
+
+/* 2倍屏 */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2.0) {
+    .tab::after {
+        -webkit-transform: scaleY(0.5);
+        transform: scaleY(0.5);
+    }
+}
+
+
+/* 3倍屏 */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3.0) {
+    .tab::after {
+        -webkit-transform: scaleY(0.33);
+        transform: scaleY(0.33);
+    }
+}
