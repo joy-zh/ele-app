@@ -53,6 +53,7 @@
     import Bus from '../../common/js/eventBus';
     import food from '../food/food';
     import price from '../price/price';
+    import {data} from '../../common/js/data.js'
 
     const ERR_OK = 0;
     export default{
@@ -95,22 +96,28 @@
         },
         created(){
             this.classMap = ['decrease','discount','special','invoice','guarantee'];
+            
+            this.goods = data.goods;
+            this.$nextTick( () =>{
+                this._initScroll();
+                this._calculateHeight();
+            })
 
-            this.$http.get("/api/goods").then(
-                function (res) {
-                    // console.log(res)
-                    // 处理成功的结果
-                    var result = res.body;
-                    this.goods = result.data||{};
-                    this.$nextTick( () =>{
-                        this._initScroll();
-                        this._calculateHeight();
-                    })
-
-                },function (res) {
-                // 处理失败的结果
-                }
-            )
+//          this.$http.get("/api/goods").then(
+//              function (res) {
+//                  // console.log(res)
+//                  // 处理成功的结果
+//                  var result = res.body;
+//                  this.goods = result.data||{};
+//                  this.$nextTick( () =>{
+//                      this._initScroll();
+//                      this._calculateHeight();
+//                  })
+//
+//              },function (res) {
+//              // 处理失败的结果
+//              }
+//          )
             Bus.$on('cart.add', el => {
                 this.$nextTick(() => {
                     this.$refs.shopcar.drop(el);

@@ -74,6 +74,7 @@
     import Bus from '../../common/js/eventBus';
     import BScroll from 'better-scroll';
     import {formatDate} from '../../common/js/date.js'
+    import {data} from '../../common/js/data.js'
     export default{
         props : {
             seller : {
@@ -99,25 +100,36 @@
             }
         },
         created(){
-            this.$http.get("/api/ratings").then(
-                function (res) {
-                    // console.log(res)
-                    // 处理成功的结果
-                    var result = res.body;
-                    this.ratings = result.data||{};
-                    this.$nextTick(() => {
-                        if( !this.scroll ){
-                            this.scroll = new BScroll(this.$refs.rating,{
-                                click:true
-                            })
-                        }else{
-                            this.scroll.refresh();
-                        }
+            this.ratings = data.ratings
+            this.$nextTick(() => {
+                if( !this.scroll ){
+                    this.scroll = new BScroll(this.$refs.rating,{
+                        click:true
                     })
-                },function (res) {
-                // 处理失败的结果
+                }else{
+                    this.scroll.refresh();
                 }
-            );
+            })
+            
+//          this.$http.get("/api/ratings").then(
+//              function (res) {
+//                  // console.log(res)
+//                  // 处理成功的结果
+//                  var result = res.body;
+//                  this.ratings = result.data||{};
+//                  this.$nextTick(() => {
+//                      if( !this.scroll ){
+//                          this.scroll = new BScroll(this.$refs.rating,{
+//                              click:true
+//                          })
+//                      }else{
+//                          this.scroll.refresh();
+//                      }
+//                  })
+//              },function (res) {
+//              // 处理失败的结果
+//              }
+//          );
             var _this = this;
             Bus.$on('ratingtype.select', type => {
                 this.selectedType = type;

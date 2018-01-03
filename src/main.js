@@ -33,14 +33,17 @@ const routes = [
       redirect:'/goods'
     },
     {
+        mode: 'history',
         path: '/goods',
         component: goods
     },
     {
+        mode: 'history',
         path: '/sellers',
         component: sellers
     },
     {
+        mode: 'history',
         path: '/ratings',
         component: ratings
     }

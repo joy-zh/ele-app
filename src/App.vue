@@ -21,6 +21,7 @@
 <script>
     import header from './components/header/header.vue';
     import {urlParse} from './common/js/util.js';
+    import {data} from './common/js/data.js'
     // document.addEventListener('touchstart',function(ev){ 
     //     ev.preventDefault();
     // }, { passive: false });
@@ -39,18 +40,19 @@
             }
         },
         created(){
+            this.seller = data.seller
             
-            this.$http.get("/api/seller?id="+this.seller.id,{name:"zhangsan"},{emulateJSON:true}).then(
-                function (res) {
-                    //console.log(res)
-                    // 处理成功的结果
-                    var result = res.body;
-                    //this.seller = result.data||{};
-                    this.seller = Object.assign({},this.seller,result.data);
-                },function (res) {
-                // 处理失败的结果
-                }
-            );
+//          this.$http.get("/api/seller?id="+this.seller.id,{name:"zhangsan"},{emulateJSON:true}).then(
+//              function (res) {
+//                  //console.log(res)
+//                  // 处理成功的结果
+//                  var result = res.body;
+//                  //this.seller = result.data||{};
+//                  this.seller = Object.assign({},this.seller,result.data);
+//              },function (res) {
+//              // 处理失败的结果
+//              }
+//          );
         },
         components : {
             "v-header":header
